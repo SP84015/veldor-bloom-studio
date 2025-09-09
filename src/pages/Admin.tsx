@@ -10,6 +10,8 @@ import { useToast } from "@/hooks/use-toast";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { LogOut, Settings, Upload, Trash2, Plus } from "lucide-react";
 import type { User } from "@supabase/supabase-js";
+import { ServicesManager } from "@/components/admin/ServicesManager";
+import { GalleryManager } from "@/components/admin/GalleryManager";
 
 const Admin = () => {
   const [user, setUser] = useState<User | null>(null);
@@ -195,37 +197,33 @@ const Admin = () => {
             </Card>
           </TabsContent>
 
-          <TabsContent value="services" className="space-y-6">
-            <Card>
-              <CardHeader>
-                <CardTitle>Services Management</CardTitle>
-                <CardDescription>
-                  Add, edit, or remove services offered by your business.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">
-                  Service management functionality will be implemented here.
-                </p>
-              </CardContent>
-            </Card>
-          </TabsContent>
+            <TabsContent value="services" className="space-y-6">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Services Management</CardTitle>
+                  <CardDescription>
+                    Add, edit, or remove services offered by your business.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  {website && <ServicesManager websiteId={website.id} />}
+                </CardContent>
+              </Card>
+            </TabsContent>
 
-          <TabsContent value="gallery" className="space-y-6">
-            <Card>
-              <CardHeader>
-                <CardTitle>Gallery Management</CardTitle>
-                <CardDescription>
-                  Upload and manage your portfolio images.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">
-                  Gallery management functionality will be implemented here.
-                </p>
-              </CardContent>
-            </Card>
-          </TabsContent>
+            <TabsContent value="gallery" className="space-y-6">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Gallery Management</CardTitle>
+                  <CardDescription>
+                    Upload and manage your portfolio images.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  {website && <GalleryManager websiteId={website.id} />}
+                </CardContent>
+              </Card>
+            </TabsContent>
 
           <TabsContent value="settings" className="space-y-6">
             <Card>

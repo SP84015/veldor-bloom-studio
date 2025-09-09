@@ -21,6 +21,7 @@ export const Contact = ({ website }: { website?: Website }) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    phone: "",
     subject: "",
     message: "",
   });
@@ -33,34 +34,40 @@ export const Contact = ({ website }: { website?: Website }) => {
 
     try {
       // Get website ID
-      const { data: websiteData } = await supabase
+      const { data: website } = await supabase
         .from("websites")
         .select("id")
         .eq("is_active", true)
         .single();
 
-      if (websiteData) {
-        const { error } = await supabase
-          .from("contact_submissions")
-          .insert({
-            website_id: websiteData.id,
-            name: formData.name,
-            email: formData.email,
-            subject: formData.subject,
-            message: formData.message,
-          });
-
-        if (error) throw error;
-
-        toast({
-          title: "Message Sent!",
-          description: "Thank you for contacting us. We'll get back to you soon.",
-        });
-
-        setFormData({ name: "", email: "", subject: "", message: "" });
+      if (!website) {
+        throw new Error("Website not found");
       }
+
+      // Send email via edge function
+      const { error } = await supabase.functions.invoke('send-contact-email', {
+        body: {
+          ...formData,
+          website_id: website.id
+        }
+      });
+
+      if (error) throw error;
+      
+      toast({
+        title: "Message Sent!",
+        description: "Thank you for your message. We'll get back to you soon.",
+      });
+      
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        subject: "",
+        message: "",
+      });
     } catch (error) {
-      console.error("Error submitting contact form:", error);
+      console.error("Contact form error:", error);
       toast({
         title: "Error",
         description: "Failed to send message. Please try again.",
@@ -88,8 +95,8 @@ export const Contact = ({ website }: { website?: Website }) => {
             </h2>
             <div className="w-24 h-1 bg-primary mx-auto mb-8"></div>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Ready to start planning your dream wedding or need our big seed solutions? 
-              Contact us today and let's create something beautiful together.
+              Ready to transform your space with custom ironwork? Contact us today to discuss 
+              your project and get a personalized quote from our master craftsmen.
             </p>
           </div>
 
@@ -115,15 +122,25 @@ export const Contact = ({ website }: { website?: Website }) => {
                     </div>
                     <div>
                       <Input
-                        type="email"
-                        name="email"
-                        placeholder="Your Email"
-                        value={formData.email}
+                        type="text"
+                        name="phone"
+                        placeholder="Phone Number (optional)"
+                        value={formData.phone}
                         onChange={handleChange}
-                        required
                         className="bg-input border-border"
                       />
                     </div>
+                  </div>
+                  <div>
+                    <Input
+                      type="email"
+                      name="email"
+                      placeholder="Your Email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      required
+                      className="bg-input border-border"
+                    />
                   </div>
                   <div>
                     <Input
@@ -200,7 +217,7 @@ export const Contact = ({ website }: { website?: Website }) => {
                     <div>
                       <h3 className="font-semibold text-card-foreground">Visit Us</h3>
                       <p className="text-muted-foreground">
-                        {website?.contact_address || "123 Wedding Lane, Celebration City, WC 12345"}
+                        {website?.contact_address || "123 Ironwork Boulevard, Craftsman City, IC 12345"}
                       </p>
                     </div>
                   </div>
