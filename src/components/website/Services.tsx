@@ -73,8 +73,8 @@ export const Services = () => {
             </h2>
             <div className="w-24 h-1 bg-primary mx-auto mb-8"></div>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              From wedding planning to big seed solutions, we offer comprehensive services 
-              to make your dreams come true.
+              From custom iron gates to decorative metalwork, we offer comprehensive ironwork services 
+              to bring your vision to life.
             </p>
           </div>
 

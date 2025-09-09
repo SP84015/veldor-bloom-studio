@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Heart, ArrowDown } from "lucide-react";
+import { Wrench, ArrowDown } from "lucide-react";
 
 interface Website {
   name: string;
@@ -25,7 +25,7 @@ export const Hero = ({ website }: { website?: Website }) => {
         style={{
           backgroundImage: website?.banner_url
             ? `url(${website.banner_url})`
-            : `url(https://images.unsplash.com/photo-1519741497674-611481863552?w=1920&h=1080&fit=crop)`,
+            : `url(https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1920&h=1080&fit=crop)`,
         }}
       >
         <div className="absolute inset-0 bg-black/40" />
@@ -34,19 +34,19 @@ export const Hero = ({ website }: { website?: Website }) => {
       {/* Content */}
       <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-4">
         <div className="flex items-center justify-center mb-6">
-          <Heart className="h-12 w-12 text-accent mr-4" />
+          <Wrench className="h-12 w-12 text-accent mr-4" />
           <h1 className="text-5xl md:text-7xl font-bold">
             {website?.name || "Veldor"}
           </h1>
         </div>
         
         <p className="text-xl md:text-2xl mb-8 leading-relaxed">
-          Creating Magical Wedding Moments & Big Seed Solutions
+          Master Craftsmen in Ironwork & Metal Fabrication
         </p>
         
         <p className="text-lg mb-12 opacity-90 max-w-2xl mx-auto">
-          Transform your special day with our premium wedding services and innovative solutions. 
-          We bring dreams to life with elegance, precision, and care.
+          From custom iron gates to decorative baskets, we create exceptional metalwork solutions. 
+          Quality craftsmanship meets modern design for residential and commercial properties.
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
