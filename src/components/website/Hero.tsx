@@ -25,7 +25,7 @@ export const Hero = ({ website }: { website?: Website }) => {
         style={{
           backgroundImage: website?.banner_url
             ? `url(${website.banner_url})`
-            : `url(https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1920&h=1080&fit=crop)`,
+            : `url(https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=1920&h=1080&fit=crop)`,
         }}
       >
         <div className="absolute inset-0 bg-black/40" />
