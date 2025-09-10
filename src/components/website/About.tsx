@@ -1,4 +1,5 @@
 import { Heart, Star, Users, Award } from "lucide-react";
+import aboutImage from "@/assets/about-ironwork.jpg";
 
 interface Website {
   about_title?: string;
@@ -50,8 +51,8 @@ export const About = ({ website }: { website?: Website }) => {
 
             <div className="relative">
               <img
-                src="https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=600&h=800&fit=crop"
-                alt="Wedding planning team"
+                src={aboutImage}
+                alt="Skilled ironworkers crafting metalwork"
                 className="rounded-lg shadow-2xl w-full h-96 object-cover"
               />
               <div className="absolute -top-4 -right-4 w-24 h-24 bg-accent rounded-full flex items-center justify-center">

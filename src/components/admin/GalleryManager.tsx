@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import { Plus, Trash2, Upload } from "lucide-react";
+import fallbackImage from "@/assets/gallery-fallback.jpg";
 
 interface GalleryImage {
   id: string;
@@ -268,7 +269,7 @@ export const GalleryManager = ({ websiteId }: { websiteId: string }) => {
                 className="w-full h-full object-cover"
                 onError={(e) => {
                   const target = e.target as HTMLImageElement;
-                  target.src = "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=400&h=300&fit=crop";
+                  target.src = fallbackImage;
                 }}
               />
             </div>
