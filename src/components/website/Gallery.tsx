@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { supabase } from "@/integrations/supabase/client";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { getGalleryImageUrl } from "@/assets/gallery-images";
 
 interface GalleryImage {
   id: string;
@@ -73,8 +74,8 @@ export const Gallery = () => {
             </h2>
             <div className="w-24 h-1 bg-primary mx-auto mb-8"></div>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Browse through our beautiful collection of weddings and events that we've had the 
-              pleasure of creating.
+              Explore our portfolio of custom ironwork projects showcasing exceptional metalwork 
+              craftsmanship and artistic design.
             </p>
           </div>
 
@@ -87,7 +88,7 @@ export const Gallery = () => {
                     onClick={() => setSelectedImageIndex(index)}
                   >
                     <img
-                      src={image.image_url}
+                      src={getGalleryImageUrl(image.image_url)}
                       alt={image.alt_text}
                       className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
                     />
@@ -97,7 +98,7 @@ export const Gallery = () => {
                 <DialogContent className="max-w-4xl w-full p-0 border-0">
                   <div className="relative">
                     <img
-                      src={images[selectedImageIndex]?.image_url}
+                      src={getGalleryImageUrl(images[selectedImageIndex]?.image_url)}
                       alt={images[selectedImageIndex]?.alt_text}
                       className="w-full h-auto max-h-[80vh] object-contain"
                     />
