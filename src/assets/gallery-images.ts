@@ -1,21 +1,31 @@
-// Gallery image imports for easy management
+// Gallery image imports for ironwork portfolio
 import galleryIronGate from "./gallery-iron-gate.jpg";
-import galleryRailings from "./gallery-railings.jpg";
+import galleryRailings from "./gallery-railings.jpg"; 
 import galleryPlanters from "./gallery-planters.jpg";
 import galleryWallArt from "./gallery-wall-art.jpg";
 import galleryFabrication from "./gallery-fabrication.jpg";
 import galleryRestoration from "./gallery-restoration.jpg";
 
-export const galleryImages = {
-  "/src/assets/gallery-iron-gate.jpg": galleryIronGate,
-  "/src/assets/gallery-railings.jpg": galleryRailings,
-  "/src/assets/gallery-planters.jpg": galleryPlanters,
-  "/src/assets/gallery-wall-art.jpg": galleryWallArt,
-  "/src/assets/gallery-fabrication.jpg": galleryFabrication,
-  "/src/assets/gallery-restoration.jpg": galleryRestoration,
+export const getGalleryImageUrl = (imageKey: string): string => {
+  // If it's just a key, try to match with imported images
+  const imageMap: { [key: string]: string } = {
+    'gallery-iron-gate': galleryIronGate,
+    'gallery-railings': galleryRailings, 
+    'gallery-planters': galleryPlanters,
+    'gallery-wall-art': galleryWallArt,
+    'gallery-fabrication': galleryFabrication,
+    'gallery-restoration': galleryRestoration,
+  };
+  
+  // Return mapped image or fallback to original key if it's a URL
+  return imageMap[imageKey] || (imageKey.startsWith('http') ? imageKey : imageKey);
 };
 
-// Function to get the actual image URL from database path
-export const getGalleryImageUrl = (dbPath: string): string => {
-  return galleryImages[dbPath] || dbPath;
+export {
+  galleryIronGate,
+  galleryRailings,
+  galleryPlanters,
+  galleryWallArt,
+  galleryFabrication,
+  galleryRestoration,
 };
